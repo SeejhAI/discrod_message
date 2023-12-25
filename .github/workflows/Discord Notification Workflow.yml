@@ -1,26 +1,22 @@
-name: Discord Notification Workflow
-
-on:
-  issues:
-    types:
-      - opened
-      - closed
-
+name : Discord Notification Workflow
+on: 
+  issues: 
+     types:
+        - opened
+        - closed
 jobs:
-  notify_on_discord:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Send Discord Notification
-      run: |
-        if [ "${{ github.event_name }}" = "issues" ]; then
-          if [ "${{ github.event.action }}" = "opened" ]; then
-            MESSAGE="New issue opened: ${{ github.event.issue.title }}"
-          elif [ "${{ github.event.action }}" = "closed" ]; then
-            MESSAGE="Issue closed: ${{ github.event.issue.title }}"
-          fi
-
-          curl -X POST -H "Content-Type: application/json" -d "{\"content\": \"$MESSAGE\"}" ${{ secrets.DISCORD_WEBHOOK_URL }}
-        fi
-      env:
-        DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+   notify_on_discord:
+         runs-on: ubuntu-latest
+         steps:
+              - name: send discord notification 
+              - run: |
+                   if [ "${{ github.event_name }}" = "issues" ]; then 
+                      if [ "${{ github.event.action }}" = "opened" ]; then
+                        MESSAGE="New issue opened: ${{ github.event.issue.title }}" 
+                      elif [ "${{ github.event.action }}" = "closed" ]; then 
+                          MESSAGE="Issue Closed: ${{ github.event.issue.title }}"
+                      fi 
+                      curl -X POST -H "Content-Type: application/json" -d "{'\"content\":$MESSAGE\"} ${{ secrets.DISCORD_WEBHOOK_URL }}
+                   fi 
+                env:
+                  DISCORD_WEBHOOK_URl: ${{ secrets.DISCORD_WEBHOOK_URL }}
