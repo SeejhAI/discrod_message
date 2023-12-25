@@ -9,7 +9,7 @@ jobs:
          runs-on: ubuntu-latest
          steps:
               - name: send discord notification 
-              - run: |
+                run: |
                    if [ "${{ github.event_name }}" = "issues" ]; then 
                       if [ "${{ github.event.action }}" = "opened" ]; then
                         MESSAGE="New issue opened: ${{ github.event.issue.title }}" 
