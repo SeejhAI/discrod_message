@@ -16,7 +16,7 @@ jobs:
                       elif [ "${{ github.event.action }}" = "closed" ]; then 
                           MESSAGE="Issue Closed: ${{ github.event.issue.title }}"
                       fi 
-                      curl -X POST -H "Content-Type: application/json" -d "{'\"content\":$MESSAGE\"} ${{ secrets.DISCORD_WEBHOOK_URL }}
+                      curl -X POST -H "Content-Type: application/json" -d "{"\"content\":\"$MESSAGE\"}" ${{ secrets.DISCORD_WEBHOOK_URL }}
                    fi 
                 env:
                   DISCORD_WEBHOOK_URl: ${{ secrets.DISCORD_WEBHOOK_URL }}
